@@ -1,0 +1,71 @@
+<body class="bg">
+<div class="container-fluid">
+  <app-header></app-header>
+  <div class="row">
+    <!-- Profile Image and Name -->
+    <div class="col-md-2 m-3 title-bar">
+      <img class="center mt-3 mb-3" src="{{user.pictureUrl}}"/>
+      <hr width="50%">
+      <h4 class="title-text" align="center"><i class="fa fa-user mr-3" aria-hidden="true">  {{user.givenName}}</i></h4><!--DevGan95-->
+      <hr width="50%">
+      <h5 align="center" style="word-wrap: break-word"><i class="fa fa-envelope" aria-hidden="true"> {{user.email}}  </i></h5><!--dev95@gmail.com-->
+      <hr width="50%">
+    </div>
+    <!-- Rest of the Profile -->
+    <div class="col-md-9 m-3 title-bar">
+      <h3 class = "m-2 title-text">Welcome, {{user.givenName}} !!!</h3>
+      <hr width="0%">
+      <hr width="50%">
+      <hr width="0%">
+      <h4 class="m-2">End Users</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <td>User Id</td>
+          <td>Username</td>
+          <td>First Name</td>
+          <td>Last Name</td>
+          <td>City</td>
+          <td>Delete User</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of generalUsers">
+          <td>{{user.id}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.givenName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.city}}</td>
+          <td><button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h4 class="m-2">Artists</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <td>User Id</td>
+          <td>Username</td>
+          <td>First Name</td>
+          <td>Last Name</td>
+          <td>City</td>
+          <td>Delete User</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let artist of generalArtists">
+          <td>{{artist.id}}</td>
+          <td>{{artist.userName}}</td>
+          <td>{{artist.givenName ? artist.givenName : artist.name}}</td>
+          <td>{{artist.lastName}}</td>
+          <td>{{artist.city}}</td>
+          <td><button class="btn btn-danger" (click)="deleteArtist(artist.id)">Delete</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</body>

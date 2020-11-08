@@ -1,0 +1,85 @@
+<body class="bg">
+<div class="container-fluid">
+  <app-header></app-header>
+
+  <div class="offset-md-1 col-md-10 mt-3 mb-3 title-bar">
+    <div class="row">
+      <div class="col-md-3 m-2">
+        <img class="artistImage" src="{{artist.image[2]['#text']}}">
+      </div>
+      <div class="col-md-5 m-2 mt-3">
+        <h1>{{artist.name}}</h1>
+        <hr width="50%">
+        <h3><i class="fa fa-users" aria-hidden="true"> Followers: {{artist.stats.listeners}}</i></h3>
+        <h3><i class="fa fa-headphones" aria-hidden="true"> PlayCount: {{artist.stats.playcount}}</i></h3>
+
+        <div *ngIf="isLoggedIn">
+          <div *ngIf="followUnfollow">
+            <button class="btn btn-success" (click)='followArtist()'>Follow   <i class="fa fa-user-plus"></i></button>
+          </div>
+          <div class="row" *ngIf="!followUnfollow">
+            <button class="btn btn-success" (click)='followArtist()'> Unfollow   <i class="fa fa-user-times"></i></button>
+
+          </div>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <button class="btn btn-success" [routerLink]="['/']" disabled>Sign In As User to start following &nbsp;<i class="fa fa-user-plus"></i></button>
+        </div>
+
+        <div [ngSwitch]="artist.ontour">
+          <div *ngSwitchCase="1" class="mt-2 mb-2">
+          <button class="btn btn-success"><h4> On Tour  <i class="fa fa-plane"></i></h4> </button>
+          </div>
+          <div *ngSwitchCase="0" class="mt-2 mb-2">
+            <button class="btn btn-dark"><h4> Currently Not On Tour  <i class="fa fa-frown-o"></i></h4></button>
+          </div>
+          <div class="row ml-1">
+          <div *ngFor="let tag of artist.tags.tag">
+            <button class="btn btn-primary btn-sm m-1"><h6>{{tag.name}}</h6></button>
+          </div>
+            <hr width="50%">
+            <div class="btn btn-warning btn-lg m-3-1" [routerLink]="['/artists',artist.name, 'events']"><h6>Events</h6></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="offset-md-1 pt-2 col-md-10 mt-3 mb-3 title-bar">
+    <h3 >About {{artist.name}}</h3>
+    <hr>
+    <h5>{{artist.bio.summary}}</h5>
+    <hr>
+    <h3>{{artist.name}} Songs and Videos</h3>
+    <hr>
+<!--    Uncomment to start displaying youtube results-->
+    <app-ytresults [query]="artist.name"></app-ytresults>
+    <hr>
+    <h3>Similar to {{artist.name}}</h3>
+    <div class="card-deck m-2 deckBg">
+      <div *ngFor="let artist of similarArtist" class="col-md-2 m-0">
+        <div class="card m-2">
+          <img class="card-img-top img-fluid artistImage" src="{{artist.image[2]['#text']}}" alt="Card image cap">
+          <div class="card-body" style="height: auto">
+            <button class="btn" (click)="getArtist(artist.id, artist.mbid)"><h4>{{artist.name}}</h4></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3>{{artist.name}} Albums</h3>
+    <div class="card-deck m-2 deckBg">
+      <div *ngFor="let album of albums" class="col-md-3 m-0">
+        <div class="card m-2">
+          <img class="card-img-top img-fluid artistImage" src="{{album.image[2]['#text']}}" alt="Card image cap">
+          <div class="card-body" style="height: auto">
+            <h4>{{album.name}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
+</body>

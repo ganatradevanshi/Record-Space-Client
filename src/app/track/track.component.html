@@ -1,0 +1,56 @@
+<body class="bg">
+<div class="container-fluid">
+  <app-header></app-header>
+
+  <div class="offset-md-1 offset-md-md-10 mt-3 mb-3 title-bar">
+    <div class="row">
+      <div class="col-md-3 m-2">
+        <img class="artistImage" src="{{track.album && track.album.image[2] ? track.album.image[2]['#text'] : ''}}" alt="Not Found">
+      </div>
+      <div class="col-md-5 m-2 mt-3">
+        <h1>{{track.name}}</h1>
+        <h3>{{track.album && track.album.artist ? track.album.artist : "Single Hit"}}</h3>
+        <h3>{{track.album.title}}</h3>
+        <hr width="50%">
+        <div *ngIf="isLoggedIn">
+          <div *ngIf="likeDislike">
+            <button class="btn btn-success mb-2" (click)='likeOrDislikeTrack()'>Like</button>
+          </div>
+          <div *ngIf="!likeDislike">
+            <button class="btn btn-success mb-2" (click)='likeOrDislikeTrack()'>Unlike</button>
+          </div>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <button class="btn btn-success mb-2" [routerLink]="['/']" disabled>Sign In As User to like</button>
+        </div>
+
+        <h4><i class="fa fa-users" aria-hidden="true"> Followers: {{track.listeners}}</i></h4>
+        <h4><i class="fa fa-headphones" aria-hidden="true"> PlayCount: {{track.playcount}}</i></h4>
+        <hr width="50%">
+        <div class="row ml-1">
+          <div *ngFor="let tag of track.toptags.tag">
+            <button class="btn btn-primary btn-sm m-1"><h6>{{tag.name}}</h6></button>
+          </div>
+        </div>
+         </div>
+    </div>
+  </div>
+
+  <div class="offset-md-1 pt-2 col-md-10 mt-3 mb-3 title-bar">
+    <h3 >About {{track.name}}</h3>
+    <hr>
+    <h5>{{track.wiki.content}}</h5>
+    <hr>
+
+      <div class="m-2" align="center">
+       <div class="p-2" style="height: 320px; width: 480px">
+          <iframe height="100%" width="100%" [src]="('https://www.youtube.com/embed/'
+          + track.ytResponse.items[0].id.videoId) | safe"></iframe>
+        </div>
+      </div>
+    <hr width="0%">
+    <hr>
+  </div>
+
+</div>
+</body>

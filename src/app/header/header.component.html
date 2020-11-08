@@ -1,0 +1,142 @@
+<div class="row title-bar p-2">
+  <div class="col-4">
+    <div class="row">
+      <i class="fa fa-grav fa-3x fa-spin mr-2 ml-2 d-none d-md-block"></i>
+      <h2 class="title-text mt-1 mb-1 ml-3 mr-3" (click)="goHome()" >Record Space</h2>
+    </div>
+  </div>
+
+  <div class="col-8 ">
+    <div [ngSwitch]="isLoggedIn">
+      <div *ngIf="type === 'user'">
+        <div *ngSwitchCase="'true'">
+          <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+              <button class="btn " (click)="goHome()"><i class="fa fa-home" aria-hidden="true"></i>
+                <div class="d-none d-md-block ">
+                  Home
+                </div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn" [routerLink]="['/dashboard']"><i class="fa fa-dashboard" aria-hidden="true"></i>
+                <div class="d-none d-md-block ">
+                  Dashboard
+                </div>
+              </button>
+
+            </div>
+            <div class="col-2">
+              <button class="btn" [routerLink]="['/profile']"><i class="fa fa-user" aria-hidden="true"></i>
+                <div class="d-none d-md-block">
+                  Profile
+                </div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn" [routerLink]="['/explore']"><i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                <div class="d-none d-md-block">
+                  Explore
+                </div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn" (click)="logoutUser()"><i class="fa fa-sign-out fa-lg"></i> </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="type === 'artist'">
+        <div *ngSwitchCase="'true'">
+          <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+
+            </div>
+            <div class="col-2">
+              <button class="btn " (click)="goHome()"><i class="fa fa-home" aria-hidden="true"></i>
+                <div class="d-none d-md-block">Home</div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn " [routerLink]="['/profile','artist','edit']"><i class="fa fa-user" aria-hidden="true"></i>
+                <div class="d-none d-md-block">Profile</div>
+              </button>
+
+            </div>
+            <div class="col-2">
+              <button class="btn " [routerLink]="['/explore']">
+                <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                <div class="d-none d-md-block">Explore</div>
+              </button>
+            </div>
+            <div class="col-2 col-xs-4">
+              <button class="btn " (click)="logoutUser()"><i class="fa fa-sign-out fa-lg"></i> </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="type === 'admin'">
+        <div *ngSwitchCase="'true'">
+          <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+              <button class="btn " (click)="goHome()"><i class="fa fa-home" aria-hidden="true"></i>
+                <div class="d-none d-md-block ">
+                  Home
+                </div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn " [routerLink]="['/admin']"><i class="fa fa-dashboard" aria-hidden="true"></i>
+                <div class="d-none d-md-block">Dashboard</div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn" [routerLink]="['/explore']"><i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                <div class="d-none d-md-block">Explore</div>
+              </button>
+            </div>
+            <div class="col-2">
+              <button class="btn" (click)="logoutUser()"><i class="fa fa-sign-out fa-lg"></i> </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngSwitchDefault>
+        <div class="row">
+          <div class="col-2 col-xs-0">
+          </div>
+          <div class="col-2 col-xs-0">
+          </div>
+          <div class="col-2 col-xs-0">
+          </div>
+          <div class="col-2 col-xs-12 float-xs-left">
+            <div class="btn btn-primary" [routerLink]="['/login']">Sign In</div>
+          </div>
+          <div class="col-2 col-xs-0">
+            <button class="btn d-none d-md-block" (click)="goHome()"><i class="fa fa-home" aria-hidden="true"></i>  Home</button>
+          </div>
+          <div class="col-2 col-xs-0">
+            <button class="btn d-none d-md-block" [routerLink]="['/explore']"><i class="fa fa-space-shuttle" aria-hidden="true"></i>  Explore</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
